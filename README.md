@@ -1,101 +1,45 @@
-# Mordet på Sveavägen
+# The Quest for AGI
 
-Ett interaktivt utredningsspel om mordet på Olof Palme den 28 februari 1986. Spelaren anländer till brottsplatsen och utreder fallet genom att prata med AI-drivna vittnen.
+A time-travel investigation game through the history — and future — of artificial intelligence.
 
-![Screenshot](client/public/images/locations/murder_scene.png)
+It is 23:53 on 30 November 2022. OpenAI has just released ChatGPT to the world. You type one last question into the box — and it answers with words it could not possibly know. You have come unstuck in the timeline of intelligence. Travel it. Interview the minds that built the future, from Ada Lovelace's study in 1843 to whatever waits at the far end of the timeline.
 
-## Funktioner
+![Screenshot](client/public/images/locations/openai_pioneer_2022.jpg)
 
-- **20 platser** i Stockholm kopplade till utredningen
-- **50 karaktärer** — vittnen, misstänkta, poliser och journalister
-- **80 ledtrådar** som låser upp nya platser och spår
-- **AI-drivna samtal** med vittnen via Claude Haiku
-- **Utredningstavla** med ritverktyg, zoom och panorering
-- **Sökbar anteckningsbok** med AI-genererade anteckningar
-- **Kontextmedveten musik** — 10 originalspår
-- **Spelarprofiler** med QR-kodsdelning
-- **Anonyma karaktärer** vars identitet avslöjas genom samtal
+## Features
 
-## Krav
+- **27 timeline nodes** across five acts — Origins, the AI winters, the deep-learning awakening, the alignment reckoning, and the long tomorrow (1843 → 2387)
+- **60 AI-powered characters** — Turing, Lovelace, Shannon, Hinton, Sutskever, the engineer who refused to sign the 2045 AGI declaration, and the system that wished she would
+- **129 clues** revealed through free-form interrogation; clues unlock new coordinates on the timeline
+- **A finale that reverses the interrogation** — the Tabulator, the archival intelligence at the end of time, asks *you* the questions, grades your understanding, and asks one last question it cannot grade
+- **Nine endings** — your verdict (yes / no / it depends) × how well you actually understood the story
+- **Investigation cork board** with draggable polaroids, red string, confirmed-connection gold string, drawing tools, and sticky notes
+- **Suggested questions, hint escalation, cross-era knowledge** — tell Turing what the machines became and watch him react
+- **Original Suno soundtrack** — 29 location tracks plus dedicated finale and epilogue themes
+- **Streaming chat** over SSE with a graceful non-streaming fallback
 
-- **Node.js** 18+
-- **OpenRouter API-nyckel** — hämta på [openrouter.ai/keys](https://openrouter.ai/keys)
+All factual content is historically grounded: the past is accurate, the future is speculative but obeys physics (Landauer's limit, Dyson 1960, Kardashev 1964).
 
-## Installation
-
-```bash
-# Klona repot
-git clone https://github.com/fltman/mordetpaolofpalme.git
-cd mordetpaolofpalme
-
-# Installera dependencies
-npm install
-cd client && npm install && cd ..
-
-# Skapa .env-fil
-cp .env.example .env
-# Redigera .env och lägg in din OPENROUTER_API_KEY
-```
-
-## Starta
-
-### Utvecklingsläge
+## Quick start
 
 ```bash
-npm run dev
+npm install && cd client && npm install && cd ..
+GAME_DATA=data/agi_game_data.json GAME_DB=server/db/agi.db node server/db/seed.js
+npm run dev        # server on :3001 (or PORT in .env), client on :5173
 ```
 
-Startar server på `http://localhost:3001` och klient på `http://localhost:5173`.
+Set `OPENROUTER_API_KEY` in `.env` (see `.env.example`), or leave it empty and let each player paste their own key in the game settings (stored in their browser only).
 
-### Produktionsläge
+Production: `cd client && npm run build`, then `NODE_ENV=production node server/index.js`.
 
-```bash
-npm run build
-npm start
-```
+## Shared-hosting deployment (PHP/MySQL)
 
-Servern körs på `http://localhost:3001` och serverar den byggda klienten.
+A complete LAMP build for shared hosting (no Node on the server) lives in `deploy/lamp/` — see `deploy/lamp/README.md`. `./build.sh` assembles a drop-in web root; `sql/agi_game.sql` is the one-shot database import.
 
-## Databashantering
+## Tech
 
-Repot innehåller en färdigseediad databas med all speldata. Om du vill återställa den:
+Node.js + Express + better-sqlite3 · React 18 + Vite + Tailwind + Leaflet · AI via OpenRouter (Claude Haiku 4.5) — a dual-call architecture where a hidden analysis model judges which clues each reply actually revealed.
 
-```bash
-npm run db:reset
-```
+## Heritage
 
-## Miljövariabler
-
-| Variabel | Beskrivning |
-|----------|-------------|
-| `OPENROUTER_API_KEY` | API-nyckel för OpenRouter (krävs) |
-| `PORT` | Serverport (standard: 3001) |
-
-## Teknikstack
-
-- **Frontend:** React 18, Vite, Tailwind CSS, Leaflet
-- **Backend:** Express, better-sqlite3
-- **AI:** Claude Haiku 4.5 via OpenRouter
-- **Karta:** CartoDB Dark Matter
-
-## Projektstruktur
-
-```
-server/          — Express-backend
-  routes/        — API-endpoints (chat, platser, spelare)
-  db/            — SQLite-databas och schema
-client/
-  src/
-    components/  — React-komponenter
-    hooks/       — Spellogik och musikhantering
-    lib/         — API-klient
-  public/
-    images/      — AI-genererade bilder (platser, karaktärer, ledtrådar)
-    music/       — Originalmusik (10 spår)
-data/            — Speldata (JSON)
-fakta/           — Research om Palme-mordet
-```
-
-## Licens
-
-MIT
+The engine began life as *Mordet på Sveavägen*, an investigation game about the 1986 assassination of Olof Palme (spec in `MORDET_PÅ_SVEAVÄGEN_SPEC.md`). The Palme game still runs on this engine via `GAME_DATA`/`GAME_DB` environment variables.
