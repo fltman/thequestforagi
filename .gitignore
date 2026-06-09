@@ -1,0 +1,23 @@
+node_modules/
+dist/
+server/db/palme.db-shm
+server/db/palme.db-wal
+.env
+.DS_Store
+
+# Local databases (rebuild with npm run db:seed)
+server/db/*.db
+server/db/*.db-*
+
+# Live deployment copy with real credentials — NEVER commit
+deploy/lamp/upload/
+
+# LAMP build output (rebuild with deploy/lamp/build.sh)
+deploy/lamp/public/
+
+# Palme soundtrack masters (originals, not used by the app)
+musik/
+
+# Local Claude Code config
+.claude/
+*.log
