@@ -8,7 +8,7 @@ export default function MusicPlayer({ muted, toggleMute, volume, setVolume, inli
       <button
         onClick={toggleMute}
         className="font-mono text-xs text-zinc-400 hover:text-white transition-colors w-5 text-center"
-        title={muted ? 'Ljud på' : 'Ljud av'}
+        title={muted ? 'Sound on' : 'Sound off'}
       >
         {muted ? '\u{1F507}' : '\u{1F50A}'}
       </button>

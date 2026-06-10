@@ -80,9 +80,9 @@ export default function ApiKeyInput({ onVerified, compact = false }) {
     ? <span className="text-blood">&#10007;</span>
     : null;
 
-  const statusText = status === 'checking' ? 'Verifierar...'
-    : status === 'valid' ? 'Nyckel giltig'
-    : status === 'invalid' ? 'Ogiltig nyckel'
+  const statusText = status === 'checking' ? 'Verifying...'
+    : status === 'valid' ? 'Key valid'
+    : status === 'invalid' ? 'Invalid key'
     : null;
 
   const statusColor = status === 'checking' ? 'text-zinc-500'
@@ -102,7 +102,7 @@ export default function ApiKeyInput({ onVerified, compact = false }) {
     return (
       <div>
         <label className="block font-mono text-[11px] text-zinc-400 mb-1">
-          OpenRouter API-nyckel
+          OpenRouter API key
         </label>
         <div className="relative">
           <input
@@ -122,7 +122,7 @@ export default function ApiKeyInput({ onVerified, compact = false }) {
 
   return (
     <div className="w-full bg-noir-800/80 border border-clue/30 rounded-lg p-4 backdrop-blur-sm">
-      <p className="font-mono text-xs text-clue mb-2">OpenRouter API-nyckel krävs</p>
+      <p className="font-mono text-xs text-clue mb-2">OpenRouter API key required</p>
       <div className="relative">
         <input
           {...inputProps}
@@ -133,7 +133,7 @@ export default function ApiKeyInput({ onVerified, compact = false }) {
         )}
       </div>
       <p className={`font-mono text-[10px] mt-1.5 ${statusColor}`}>
-        {statusText || 'Hämta din nyckel på openrouter.ai/keys'}
+        {statusText || 'Get your key at openrouter.ai/keys'}
       </p>
     </div>
   );
