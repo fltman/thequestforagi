@@ -1,5 +1,7 @@
 # The Quest for AGI
 
+[![Support me on Patreon](https://img.shields.io/badge/Patreon-Support%20my%20work-FF424D?style=flat&logo=patreon&logoColor=white)](https://www.patreon.com/AndersBjarby)
+
 A time-travel investigation game through the history — and future — of artificial intelligence.
 
 It is 23:53 on 30 November 2022. OpenAI has just released ChatGPT to the world. You type one last question into the box — and it answers with words it could not possibly know. You have come unstuck in the timeline of intelligence. Travel it. Interview the minds that built the future, from Ada Lovelace's study in 1843 to whatever waits at the far end of the timeline.
